@@ -3,7 +3,6 @@ const Answer = require('../models/answer')
 
 module.exports = class QuestionController {
   static getAll(req, res) {
-    console.log(req.query, '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<, ini req queryan')
     if (req.query.q) {
       Question
         .find({

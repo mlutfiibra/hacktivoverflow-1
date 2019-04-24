@@ -22,17 +22,38 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      beforeEnter(to, from, next) {
+        if (localStorage.getItem('token')) {
+          next('/')
+        } else {
+          next()
+        }
+      }
     },
     {
       path: '/register',
       name: 'register',
-      component: Register
+      component: Register,
+      beforeEnter(to, from, next) {
+        if (localStorage.getItem('token')) {
+          next('/')
+        } else {
+          next()
+        }
+      }
     },
     {
       path: '/asking',
       name: 'asking',
       component: Asking,
+      beforeEnter(to, from, next) {
+        if (localStorage.getItem('token')) {
+          next()
+        } else {
+          next('/login')
+        }
+      }
     },
     {
       path: '/questions/:id',

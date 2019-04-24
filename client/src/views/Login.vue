@@ -52,7 +52,7 @@ export default {
             type: 'success',
             title: 'Sign In Success'
           })
-          this.$router.push('/')
+          this.$router.replace('/')
         })
         .catch(err => {
           Swal.fire({
