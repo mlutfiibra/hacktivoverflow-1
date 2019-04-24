@@ -32,6 +32,14 @@ let QuestionSchema = new Schema({
   }
 })
 
+QuestionSchema.pre('findOneAndUpdate', function (next) {
+  if (!this.getUpdate().title || !this.getUpdate().description) {
+    next(new Error())
+  } else {
+    next()
+  }
+})
+
 let Question = mongoose.model('Question', QuestionSchema)
 
 module.exports = Question

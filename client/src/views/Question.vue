@@ -221,7 +221,13 @@ export default {
           this.description = ''
         })
         .catch(err => {
-          console.log(err)
+          Swal.fire({
+            position: 'center',
+            type: 'error',
+            title: err.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
         })
     },
 

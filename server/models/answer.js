@@ -7,7 +7,8 @@ let AnswerSchema = new Schema({
     ref: 'User'
   },
   description: {
-    type: String
+    type: String,
+    required: true
   },
   upvotes: [{
     type: Schema.Types.ObjectId,
@@ -20,6 +21,14 @@ let AnswerSchema = new Schema({
   created_at: {
     type: Date,
     default: new Date()
+  }
+})
+
+AnswerSchema.pre('findOneAndUpdate', function (next) {
+  if (!this.getUpdate().description) {
+    next(new Error())
+  } else {
+    next()
   }
 })
 

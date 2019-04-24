@@ -4,7 +4,7 @@
     <input v-model="title" type="text" style="width: 800px;">
     Description
     <vue-editor v-model="description"></vue-editor>
-    <button @click.prevent="saveContent">Save</button>
+    <button type="button" class="btn btn-unique btn-md" @click.prevent="saveContent">Save</button>
   </div>
 </template>
 
@@ -54,7 +54,13 @@ export default {
           this.$router.push(`/questions/${this.$route.params.id}`)
         })
         .catch(err => {
-          console.log(err)
+          Swal.fire({
+            position: 'center',
+            type: 'error',
+            title: 'All field must be filled',
+            showConfirmButton: false,
+            timer: 1500
+          })
         })
     }
   },

@@ -57,7 +57,13 @@ export default {
           this.$router.push(this.prevRoute)
         })
         .catch(err => {
-          console.log(err)
+          Swal.fire({
+            position: 'center',
+            type: 'error',
+            title: 'Field answer must be filled',
+            showConfirmButton: false,
+            timer: 1500
+          })
         })
     }
   },
