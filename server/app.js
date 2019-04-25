@@ -22,9 +22,17 @@ app.use(cors())
 
 io.on('connection', (socket) => {
   console.log('new connection created')
+  newsapi.v2.sources({
+    category: 'technology',
+    language: 'en',
+    country: 'us'
+  }).then(response => {
+    io.emit('news', response.sources[Math.floor(Math.random() * response.sources.length)])
+  })
 })
 
-new CronJob('0 0 0 * * *', function() {
+new CronJob('0 0 * * * *', function() {
+  // change news every 1 hours
   newsapi.v2.sources({
     category: 'technology',
     language: 'en',

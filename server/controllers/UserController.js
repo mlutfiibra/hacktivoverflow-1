@@ -45,29 +45,4 @@ module.exports = class UserController {
       res.status(500).json(err)
     })
   }
-
-  static getOneUser(req, res) {
-    UserModel
-      .findById(req.authenticatedUser.id)
-      .populate('carts')
-      .then(user => {
-        res.status(200).json(user)
-      })
-      .catch(err => {
-        res.status(500).json(err)
-      })
-  }
-
-  static clearCart(req, res) {
-    UserModel
-      .findByIdAndUpdate(req.authenticatedUser.id, {
-        carts: []
-      })
-      .then(user => {
-        res.status(200).json(user)
-      })
-      .catch(err => {
-        res.status(500).json(err)
-      })
-  }
 }
