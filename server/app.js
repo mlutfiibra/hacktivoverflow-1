@@ -13,7 +13,7 @@ const newsapi = new NewsAPI(process.env.NEWS_API)
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
 
-mongoose.connect('mongodb://localhost/hacktivoverflow', {useNewUrlParser: true})
+mongoose.connect(`mongodb+srv://${process.env.ATLAS_USERNAME}:${process.env.ATLAS_PWD}@hacktivoverflow-u9a0c.mongodb.net/test?retryWrites=true`, {useNewUrlParser: true})
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
@@ -22,16 +22,9 @@ app.use(cors())
 
 io.on('connection', (socket) => {
   console.log('new connection created')
-  newsapi.v2.sources({
-    category: 'technology',
-    language: 'en',
-    country: 'us'
-  }).then(response => {
-    io.emit('news', response.sources[Math.floor(Math.random() * response.sources.length)])
-  })
 })
 
-new CronJob('0 0 * * * *', function() {
+new CronJob('0 * * * *', function() {
   // change news every 1 hours
   newsapi.v2.sources({
     category: 'technology',

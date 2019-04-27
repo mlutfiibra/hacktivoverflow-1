@@ -19,7 +19,7 @@
 export default {
   data() {
     return {
-      socket: io('http://localhost:3000'),
+      socket: io('http://35.240.210.212'),
       news: {
         description: '',
         url: ''
